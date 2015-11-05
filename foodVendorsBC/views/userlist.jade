@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    h1.
+        FOOD VENDORS
+    ul
+        each user, i in userlist
+            li
+            table
+                a(href="mailto:#{user.BUSINESS_NAME}")= user.BUSINESS_NAME
+                td #{user.LAT}
+                td #{user.LON}
+                td #{user.STATUS}
+                td #{user.LOCATION}
+                td #{user.DESCRIPTION}

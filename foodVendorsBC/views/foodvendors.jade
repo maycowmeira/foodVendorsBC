@@ -1,0 +1,33 @@
+extends layout
+
+block content
+    h1.
+        FOOD VENDORS
+    ul
+    form#formLoadData(name="load",method="get",action="/loaddata")
+        button#btnLoad(type="submit") Load
+    br
+    br
+    br   
+    table#foodVendors
+      thead
+        th Vendor Name
+        th Status
+        th Location
+        th Food Type
+      tbody
+        - var s = -1
+        each vendor, i in foodvendors
+            - ++s
+            tr(class=(s % 2 == 0) ? 'odd' : 'even')
+                td(style = 'display : none') #{vendor._id}
+                td
+                    form#formVendorPage(name="vendor",method="get",action="/vendors")
+                        div(style = 'display : none')
+                            input#vendorID(value= "#{vendor._id}", name = "vendorID")
+                        a(href="vendors?vendorID="+"#{vendor._id}", type = "submit", onclick="formVendorPage.submit();")= vendor.BUSINESS_NAME
+                td(style = 'display : none') #{vendor.LAT}
+                td(style = 'display : none') #{vendor.LON}
+                td #{vendor.STATUS}
+                td #{vendor.LOCATION}
+                td #{vendor.DESCRIPTION}
